@@ -1,0 +1,333 @@
+/*Обнуление*/
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+:focus,
+:active {
+    outline: none;
+}
+a:focus,
+a:active {
+    outline: none;
+}
+nav,
+footer,
+header,
+aside {
+    display: block;
+}
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-family: Rubik;
+    font-size: 12px;
+    color: #616161;
+}
+input,
+button,
+textarea {
+    font-family: inherit;
+}
+input::-ms-clear {
+    display: none;
+}
+button {
+    cursor: pointer;
+}
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+a,
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+ul li {
+    list-style: none;
+}
+img {
+    vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: 400;
+}
+/*Стили*/
+
+/*general styles*/
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+._container {
+    margin: 0 auto;
+    max-width: 1087px;
+    /* отступ безопасности. В данном случае нужно добавить 30px
+  к ограничивающему контейнеру 1057 + 30 */
+    padding: 0px 15px;
+}
+/* PC version */
+@media (max-width: 1057px) {
+    ._container {
+        max-width: 970px;
+    }
+}
+/* TABLET version */
+/* Если мы напишем целое значение (992px), то на некоторых
+планшетах будут действовать мобильные стили, что нам не нужно */
+@media (max-width: 991.98px) {
+    ._container {
+        max-width: 750px;
+    }
+}
+/* MOBILE version */
+@media (max-width: 767.98px) {
+    ._container {
+        max-width: none;
+    }
+}
+/* MOBILE small version */
+@media (max-width: 479.98px) {
+}
+/*general styles --- end*/
+
+/* header */
+.header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+.header__container {
+    display: flex;
+
+    /* центруем элементы по вертикали */
+    min-height: 114px;
+    align-items: center;
+}
+.header__logo {
+    position: relative;
+    z-index: 5;
+}
+.header__menu {
+    /* Увеличиваем меню для прибития кнопки button */
+    flex: 1 1 auto;
+}
+.header__button {
+    flex: 0 0 252px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    position: relative;
+    z-index: 5;
+}
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+.menu__list {
+    display: flex;
+}
+.menu__item {
+    margin: 0px 40px 0px 0px;
+}
+@media (max-width: 991.98px) {
+    .header__container {
+        min-height: 80px;
+    }
+    .menu__item {
+        margin: 0px 30px 0px 0px;
+    }
+    .header__button {
+        flex: 0 0 170px;
+    }
+}
+/* В некоторых случаях, когда у нас логотип состоит из SVG, часть его мы можем скрыть
+    (в данном случае, его текст). Посмотрим в фигме и увидим, что сам логотип = 40px.
+    Указываем размер самого логотипа, без текста и скрываем все лишнее.
+    */
+@media (max-width: 479.98px) {
+    .header__logo {
+        flex: 0 0 40px;
+        overflow: hidden;
+    }
+}
+.menu__link {
+    font-family: Raleway;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    color: #000000;
+    letter-spacing: 1px;
+}
+.menu__link:hover {
+    text-decoration: underline;
+}
+@media (max-width: 767.98px) {
+    .menu__body {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background: #fff;
+        padding: 90px 15px 30px 15px;
+        transition: left 0.3s ease 0s;
+    }
+    /* Когда таргет получает нажатие, он открывает menu__body */
+    .header:target .menu__body {
+        left: 0;
+    }
+    .header:target .menu__body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 80px;
+        width: 100%;
+        background: #fff;
+    }
+    .menu__list {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu__item {
+        margin: 0px 0px 25px 0px;
+    }
+    .menu__item:last-child {
+        margin-bottom: 0;
+    }
+    .menu__link {
+        color: #000;
+        font-size: 20px;
+    }
+}
+.button {
+    /* В данном случае кнопка является flex-элементом, 
+   но в других бэм блоках может и не быть, поэтому стоит добавить 
+   строчному элементу inline-block */
+    display: inline-block;
+
+    font-family: Raleway;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    color: #fcfdfe;
+
+    border-radius: 5px;
+    padding: 14px 30px;
+    background-color: #ec5863;
+
+    transition: background-color 0.3s ease 0s;
+}
+.button:hover {
+    background-color: #a6585d;
+}
+
+.button_blue {
+    background-color: #4285f4;
+}
+.button_blue:hover {
+    background-color: #648fd4;
+}
+/* burger --------------------- */
+.close-icon-menu,
+.icon-menu {
+    display: none;
+}
+@media (max-width: 767.98px) {
+    .close-icon-menu,
+    .icon-menu {
+        position: relative;
+        flex: 0 0 30px;
+        height: 18px;
+        margin: 0px 0px 0px 20px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .icon-menu::before,
+    .icon-menu::after {
+        content: "";
+        background: #000;
+        height: 2px;
+    }
+
+    .icon-menu span {
+        background: #000;
+        height: 2px;
+    }
+
+    .close-icon-menu {
+        display: none;
+    }
+
+    .close-icon-menu::before,
+    .close-icon-menu::after {
+        content: "";
+        background: #000;
+        height: 2px;
+        transform-origin: 0 0;
+    }
+    .close-icon-menu::before {
+        transform: rotate(35deg);
+    }
+    .close-icon-menu::after {
+        transform: rotate(-35deg);
+    }
+
+    .header:target .icon-menu {
+        display: none;
+    }
+    .header:target .close-icon-menu {
+        display: flex;
+    }
+}
+/* header --- end */
+
+/* main */
+.main {
+    /* Прибили footer */
+    flex: 1 1 100%;
+}
+/* main --- end */
+
+/* footer */
+
+/* footer --- end */
